@@ -1,0 +1,193 @@
+CREATE TABLE bComment
+(
+    bCommentId NUMBER(10),
+    bCommentUser VARCHAR2(300),
+    bCommentdate DATE,
+    bCommentContents VARCHAR2(300),
+    boardId NUMBER(10),
+    CONSTRAINT bComment_pk PRIMARY KEY (bCommentId)
+ 
+);
+
+CREATE TABLE board
+(
+    boardId NUMBER(10),
+    boardTitle VARCHAR2(300) NOT NULL,
+    boardContent VARCHAR2(300) NOT NULL,
+    boardDate DATE,
+    answerYN CHAR(1),
+    memberId NUMBER(30) NOT NULL,
+    memberName VARCHAR2(30) NOT NULL,
+    CONSTRAINT board1_pk PRIMARY KEY (boardId)
+);
+
+CREATE TABLE cart
+(
+    cartId NUMBER(10),
+    memberId NUMBER(30) NOT NULL,
+    cartCount NUMBER(5) NOT NULL,
+    cartSize VARCHAR2(100) NOT NULL,
+    cartColor VARCHAR2(100) NOT NULL,
+    productId NUMBER(10) NOT NULL,
+    productprice VARCHAR2(200) NOT NULL,
+    productname VARCHAR2(300) NOT NULL,
+    pimageAddr1 VARCHAR2(300), NOT NULL,
+    CONSTRAINT cart_pk PRIMARY KEY (cartId)
+);
+
+CREATE TABLE coupon
+(
+    couponid NUMBER(10),
+    couponname VARCHAR2(300),
+    couponprice VARCHAR2(300),
+    memberId NUMBER(30),
+    CONSTRAINT coupon_pk PRIMARY KEY (couponid)
+);
+
+CREATE TABLE event
+(
+    eventId NUMBER(10),
+    eventName VARCHAR2(30) NOT NULL,
+    eventContents VARCHAR2(500) NOT NULL,
+    eventImage VARCHAR2(100),
+    CONSTRAINT event_pk PRIMARY KEY (eventId)
+);
+
+CREATE TABLE likes
+(
+    likeid NUMBER(10),
+    reviewid NUMBER(10),
+    memberid VARCHAR2(30),
+    CONSTRAINT likes_pk PRIMARY KEY (likeid)
+);
+
+CREATE TABLE manager
+(
+    managerId NUMBER(10) NOT NULL,
+    manageremail VARCHAR2(100) NOT NULL,
+    managerPwd VARCHAR2(20) NOT NULL,
+    CONSTRAINT manager_pk PRIMARY KEY (managerId)
+);
+
+CREATE TABLE member
+(
+    memberId NUMBER(30),
+    memberPwd VARCHAR2(20) NOT NULL,
+    memberName VARCHAR2(30) NOT NULL,
+    memberEmail VARCHAR2(30) NOT NULL,
+    memberPhoneNum VARCHAR2(20) NOT NULL,
+    memberRating NUMBER(30),
+    memberSignUpDate DATE,
+    memberBaseAddress VARCHAR2(30) NOT NULL,
+    memberInstagramId VARCHAR2(30) NOT NULL,
+    memberratename VARCHAR2(100) NOT NULL,
+    memberratedate DATE,
+    CONSTRAINT member_pk PRIMARY KEY (memberId)
+);
+
+CREATE TABLE options
+(
+    optionsId NUMBER(10),
+    productId NUMBER(10) NOT NULL,
+    optionsColor VARCHAR2(50) NOT NULL,
+    optionsSize VARCHAR2(50) NOT NULL,
+    optionsStock NUMBER(3) NOT NULL,
+    CONSTRAINT options_pk PRIMARY KEY (optionsId)
+);
+
+CREATE TABLE pay
+(
+    payId NUMBER(10),
+    productId NUMBER(10) NOT NULL,
+    payColor VARCHAR2(100) NOT NULL,
+    paySize VARCHAR2(100) NOT NULL,
+    payCount NUMBER(5) NOT NULL,
+    payDate DATE,
+    payCost NUMBER(30) NOT NULL,
+    memberId VARCHAR2(30),
+    reviewid NUMBER(10),
+    refundid NUMBER(10),
+    CONSTRAINT pay_pk PRIMARY KEY (payid)
+);
+
+CREATE TABLE pimage
+(
+    productId NUMBER(10),
+    pimageAddr1 VARCHAR2(500),
+    pimageAddr2 VARCHAR2(500),
+    pimageAddr3 VARCHAR2(500),
+    CONSTRAINT pimage_pk PRIMARY KEY (productId)
+);
+
+CREATE TABLE product
+(
+    productid NUMBER(10),
+    productGender CHAR(1) NOT NULL,
+    productName VARCHAR2(300) NOT NULL,
+    productPrice NUMBER(7) NOT NULL,
+    productType VARCHAR2(50) NOT NULL,
+    productInfo VARCHAR2(2500) NOT NULL,
+    productCo VARCHAR2(500) NOT NULL,
+    eventId VARCHAR2(30) NOT NULL,
+    productCnt NUMBER(10) NOT NULL,
+    CONSTRAINT product_pk PRIMARY KEY (productId)
+);
+
+CREATE TABLE rComment
+(
+    rCommentId NUMBER(10),
+    memberId NUMBER(30) NOT NULL,
+    memberName VARCHAR2(30) NOT NULL,
+    rCommentdate DATE,
+    rCommentContents VARCHAR2(300) NOT NULL,
+    reviewId NUMBER(10) NOT NULL,
+    CONSTRAINT rComment_pk PRIMARY KEY (rCommentId)
+);
+
+CREATE TABLE refund
+(
+    refundId NUMBER(30),
+    payId NUMBER(10) NOT NULL,
+    memberId VARCHAR2(30) NOT NULL,
+    refundAccount NUMBER(20) NOT NULL,
+    refundBank VARCHAR2(30) NOT NULL,
+    refundDate DATE,
+    CONSTRAINT refund_pk PRIMARY KEY (refundId)
+);
+
+CREATE TABLE review
+(
+    reviewId NUMBER(10),
+    reviewTotal NUMBER(1) NOT NULL,
+    reviewQuality VARCHAR2(150) NOT NULL,
+    reviewTitle VARCHAR2(100) NOT NULL,
+    reviewText VARCHAR2(300) NOT NULL,
+    reviewDate DATE,
+    reviewHeight NUMBER(5,1),
+    reviewWeight NUMBER(5),
+    reviewImg VARCHAR2(100),
+    reviewThumbs NUMBER(5),
+    payid NUMBER(10) NOT NULL,
+    productId NUMBER(10) NOT NULL,
+    reviewBestYN CHAR(1),
+    memberid VARCHAR2(30),
+    reviewcolor VARCHAR2(50),
+    reviewsize VARCHAR2(50),
+    CONSTRAINT review_pk PRIMARY KEY (reviewId)
+);
+
+CREATE SEQUENCE bcomment_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE board_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE cart_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE coupon_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE event_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE likes_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE manager_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE member_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE options_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE pay_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE product_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE rcomment_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE refund_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+CREATE SEQUENCE review_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 9999 NOCYCLE NOCACHE NOORDER;
+
