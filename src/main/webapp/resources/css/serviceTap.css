@@ -1,0 +1,19 @@
+ /* 고객센터 탭 css 시작 -------------------------------------------- */
+  
+  .service-tap-btn{
+    display: flex;
+    width: 30%;
+    padding-bottom: 3%;
+    justify-content: space-between;
+    margin-right: 0%;
+  }
+  
+  .service-tap-button{
+    border: none;
+    width: 15em;
+    height: 2.5em;
+/*     background-color: black; */
+    color: white
+  }
+  
+  /* 고객센터 탭 css 종료 -------------------------------------------- */

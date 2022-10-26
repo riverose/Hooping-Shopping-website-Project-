@@ -1,0 +1,71 @@
+/* 고객센터 페이지 ( 게시글 ) 추가 css 시작 -------------------------------------------- */
+  
+  #article{
+    margin-bottom: 20px;
+      background: #fff;
+      box-sizing: border-box;
+      border-top: 2px solid #000;
+      margin-top: 30px;
+  }
+  
+  #ar-title{
+    padding: 20px 0px;
+  }
+  
+  #ar-info{
+    padding: 10px 0 15px;
+    border-bottom: 1px solid #ddd;
+    color: #666;
+  }
+  
+  .ar-date, .ans-date{
+    float: right;
+    margin: 0;
+    color: #888;
+  }
+  
+  .ar-main-text{
+    margin: 30px 0 30px;
+    width: 100%;
+    line-height: 1.7em;
+    min-height: 200px;
+    word-break: break-all;
+    overflow: hidden;
+    font-size: 1.3em;
+  }
+  
+  .answer-box{
+    padding: 10px 0 15px;
+    border-top: 1px solid #ddd;
+    color: #666;
+  }
+  
+  .ans-text{
+    display: inline-block;
+  }
+  
+  .ans-btns > ul{
+    padding: 0;
+      list-style: none;
+      word-break: break-all;
+  }
+  
+  .ans-edit{
+    float: right;
+  }
+  
+  .ans-com-btn-ul{
+      margin: 20px 0;
+      float: left;
+  }
+  
+  .ans-com-btn-ul li{
+    float: left;
+  }
+  
+  .ans-list-ul{
+    margin: 20px 0;
+    float: right;
+  }
+  
+  /* 고객센터 페이지 ( 게시글 ) 추가 css 종료 ----------------------------------- */

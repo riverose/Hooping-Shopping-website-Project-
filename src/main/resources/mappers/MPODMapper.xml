@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MPODDAO">
+
+	<select id="payList" resultType="mypage">
+		SELECT *
+		FROM pay, product
+		WHERE pay.productId = product.productId
+      AND memberId = #{memberId}
+	</select>
+
+	<select id="getmember" resultType="mypage"
+		parameterType="mypage">
+		SELECT *
+		FROM member
+		WHERE memberId = #{memberId}
+	</select>
+
+	<select id="getmember1" resultType="order" parameterType="order">
+		SELECT
+		*
+		FROM member
+		WHERE memberId = #{memberId}
+	</select>
+
+<!-- 	<select id="getcoupon" resultType="order"> -->
+<!-- 		SELECT * FROM coupon -->
+<!-- 	</select> -->
+	
+	 <select id="getPay" resultType="mypage" parameterType="mypage">
+	SELECT * FROM 
+		pay, product
+		WHERE pay.productId = product.productId
+AND pay.payId = #{payId}
+	</select> 
+	
+	<select id="reviewList" resultType="mypage">
+		SELECT *
+		FROM review
+	</select>
+
+	<select id="getProduct" parameterType="order" resultType="order">
+		select
+		* from product
+		where productId = #{productId}
+	</select>
+
+	<insert id="insertPay" parameterType="product">
+	
+		INSERT INTO PAY
+		(payid,PRODUCTID,PAYCOLOR,PAYSIZE,PAYCOUNT,PAYCOST,PAYDATE,MEMBERID,REVIEWID, REFUNDID)
+		values
+		(PAY_SEQ.nextval,#{productId},#{optionsColor},#{optionsSize},1,#{productPrice},SYSDATE,#{memberId},0,0)
+	</insert>
+
+	<insert id="insertRefund" parameterType="mypage">
+		insert into refund(refundId, PAYID,MEMBERID,REFUNDACCOUNT,REFUNDBANK,REFUNDDATE)
+		values
+		(refund_seq.nextval,#{payId},#{memberId},#{refundAccount},#{refundBank},SYSDATE)
+	</insert>
+	<select id="getRefund" parameterType="mypage" resultType="mypage">
+		select payId,refundId from refund where payId=#{payId}
+	</select>
+	<update id="updatePayRefund" parameterType="mypage">
+		update pay set refundId=#{refundId} where payId=#{payId}
+	</update>
+
+	<insert id="insertCartPay" parameterType="int">
+		INSERT INTO pay
+		(payid,PRODUCTID,PAYCOLOR,PAYSIZE,PAYCOUNT,PAYDATE,PAYCOST,MEMBERID,REVIEWID, REFUNDID)
+		VALUES
+		(pay_seq.NEXTVAL, 
+		(SELECT productid FROM cart WHERE cartid = #{cartId}),
+        (SELECT cartcolor FROM cart WHERE cartid = #{cartId}),
+        (SELECT cartsize FROM cart WHERE cartid = #{cartId}),
+        (SELECT cartcount FROM cart WHERE cartid = #{cartId}),
+        sysdate,
+        (SELECT productprice FROM cart WHERE cartid = #{cartId}),
+        (SELECT memberid FROM cart WHERE cartid = #{cartId}),0,0)	
+	</insert>	
+	
+	 <delete id="deleteAllCart" parameterType="int">
+    	DELETE 
+    	  FROM cart
+		 WHERE memberid = #{memberId}    
+    </delete>
+
+</mapper>

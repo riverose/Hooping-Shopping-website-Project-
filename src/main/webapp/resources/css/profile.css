@@ -1,0 +1,23 @@
+/* 프로필 수정 추가 css 시작 ------------------------------- */
+  
+  .profile-subtitle{
+    font-weight: bold;
+    margin-bottom: 5%;
+  }
+  
+  .profile-control-group{
+    width: 50%;
+    padding-bottom: 1%;
+  }
+  
+  .profile-form-control{
+    display: inline-block;
+    width: 80%
+  }
+  
+  .profile-edit-body{
+    width: 1000px;
+    
+  }
+  
+  /* 프로필 수정 추가 css 종료 ---------------------------------------------------*/

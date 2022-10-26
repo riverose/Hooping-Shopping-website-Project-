@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+ <configuration>
+ 	<typeAliases>
+ 		<typeAlias type="com.hoo.ping.domain.MemberVO" alias="member"/>
+ 		<typeAlias type="com.hoo.ping.domain.BoardVO" alias="board"/>
+ 		<typeAlias type="com.hoo.ping.domain.BCommentVO" alias="bComment"/>
+ 		<typeAlias type="com.hoo.ping.domain.Pagination" alias="pagination"/>
+ 		<typeAlias type="com.hoo.ping.domain.ReviewVO" alias="review"/>
+ 		<typeAlias type="com.hoo.ping.domain.ProductVO" alias="product"/>
+        <typeAlias type="com.hoo.ping.domain.OptionsVO" alias="options"/>
+        <typeAlias type="com.hoo.ping.domain.RCommentVO" alias="rComment"/>
+        <typeAlias type="com.hoo.ping.domain.MyPageVO" alias="mypage" />
+		<typeAlias type="com.hoo.ping.domain.OrderPageVO" alias="order" />
+		<typeAlias type="com.hoo.ping.domain.CartVO" alias="cart"/>
+		<typeAlias type="com.hoo.ping.domain.LikesVO" alias="likes" />
+		<typeAlias type="com.hoo.ping.domain.RateVO" alias="rate" />
+		
+		
+ 	</typeAliases>
+ </configuration>

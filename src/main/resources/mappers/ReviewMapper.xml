@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewDAO">
+	<insert id="insertReview" parameterType="review">
+		
+	  INSERT INTO review ( REVIEWID, REVIEWSTAR, REVIEWQUALITY,
+		REVIEWTITLE,REVIEWTEXT,REVIEWDATE
+		<if test="reviewHeight != null">,REVIEWHEIGHT</if>
+		<if test="reviewWeight != null">,REVIEWWEIGHT</if>
+		<if test="reviewImg != null">,REVIEWIMG</if>
+		, REVIEWTHUMBS, payID, PRODUCTID, REVIEWBESTYN, MEMBERID, REVIEWCOLOR, REVIEWSIZE)
+
+		VALUES (
+		review_seq.nextval, #{reviewStar}, #{reviewQuality},
+		#{reviewTitle},
+		#{reviewText}, SYSDATE
+		<if test="reviewHeight != null">,#{reviewHeight}</if>
+		<if test="reviewWeight != null">,#{reviewWeight}</if>
+		<if test="reviewImg != null">,#{reviewImg}</if>
+		, 0, #{payId}, #{productId}, 0, #{memberId}, #{reviewColor}, #{reviewSize} )
+	</insert>
+
+	<select id="reviewUplode" parameterType="review"
+		resultType="review">
+		SELECT *
+		FROM review
+		WHERE REVIEWTITLE = #{reviewTitle}
+	</select>
+
+	<select id="getReviewList" resultType="review" parameterType="pagination">
+		SELECT *
+			FROM(
+			    SELECT rownum as rnum, t.*
+			    FROM
+			    (
+			        SELECT r.*, m.membername
+			        FROM REVIEW r, member m
+			        WHERE r.productId = #{productId}
+					  AND r.memberId = m.memberId
+					AND NOT(r.reviewid = #{reviewId})
+			        ORDER BY r.MEMBERID DESC
+			    ) t
+			    WHERE rownum <![CDATA[<]]> #{startList}+#{sizePerPage}
+			)
+		WHERE rnum <![CDATA[>=]]> #{startList}
+	</select>
+	
+	<!-- 추가 -->
+	<select id="getReviewPageList" resultType="review">
+		SELECT r.*, m.membername
+		  FROM review r, member m
+		 WHERE r.memberId = m.memberId
+		 ORDER BY REVIEWTHUMBS DESC
+	</select>
+
+	<select id="cntreviewList" resultType="int" parameterType="review">
+		SELECT COUNT(*) 
+		FROM review
+	</select>
+
+<select id="cntMyReviewList" resultType="int" parameterType="int">
+SELECT COUNT(*)
+FROM review
+WHERE memberId = #{memberId}
+</select>
+
+<select id="cntProductReviewList" resultType="int" parameterType="int">
+SELECT COUNT(*)
+FROM review
+WHERE productId = #{productId}
+</select>
+
+	<select id="getReview" parameterType="review" resultType="review">
+		SELECT re.*, pr.productname, pa.paycolor, pa.paysize, mem.memberrating, mem.membername
+			FROM review re, product pr, pay pa, member mem
+		 WHERE pr.productid = pa.productid
+			 AND pa.payid = re.payid
+			 AND re.reviewid = #{reviewId}
+			 AND re.memberid = mem.memberid
+	</select>
+	
+	<insert id="insertRComment">
+		INSERT INTO rComment(rcommentId, memberId, memberName, rcommentDate
+							, rcommentContents, reviewId)
+	 	VALUES (rcomment_seq.NEXTVAL, #{memberId}, #{memberName}, SYSDATE,
+	 			#{rcommentContents}, #{reviewId})
+	</insert>
+	
+	<select id="getRCommentList" parameterType="review" resultType="rComment">
+		SELECT *
+		  FROM rcomment
+		 WHERE reviewId = #{reviewId}
+		 ORDER BY RCOMMENTDATE
+	</select>
+	
+	<select id="thumbsYN" parameterType="review" resultType="int">
+		SELECT COUNT(*)
+		  FROM likes
+		 WHERE reviewId = #{reviewId}
+		   AND memberId = #{memberId}
+	</select>
+	
+	<select id="getMyReviewList" resultType="review" parameterType="pagination">
+		SELECT *
+		FROM(
+		SELECT rownum as rnum, t.*
+		FROM
+		(
+		SELECT *
+		FROM REVIEW
+		WHERE MEMBERID = #{memberId}
+		ORDER BY REVIEWDATE DESC
+		) t
+		WHERE rownum <![CDATA[<]]>
+		#{startList}+#{sizePerPage}
+		)
+		WHERE rnum <![CDATA[>=]]>
+		#{startList}
+	</select>
+	
+	<delete id="deleteReview" parameterType="String">
+		 DELETE 
+         FROM review
+        WHERE reviewId = #{reviewId}
+	</delete>
+
+<delete id="deleteRCommnetReivew" parameterType="String">
+DELETE
+FROM rcomment
+WHERE reviewId = #{reviewId}
+
+</delete>
+
+<delete id="deleteRComment" parameterType="String">
+DELETE
+FROM rcomment
+WHERE rcommentid = #{rcommentId}
+
+</delete>
+	
+	<!-- 추가 -->
+	<update id="updateRating" parameterType="review">
+		UPDATE member
+		   SET memberRating = memberRating + #{memberRating}
+		 WHERE memberId = #{memberId}
+	</update>
+	
+	<insert id="insertThumbsYN" parameterType="likes">
+		INSERT INTO likes (likeid, reviewid, memberid)
+		VALUES (likes_seq.nextval, #{reviewId}, #{memberId})
+	</insert>
+	
+	<update id="incThumbs" parameterType="likes">
+		UPDATE review
+		   SET reviewThumbs = reviewThumbs + 1
+		 WHERE reviewid = #{reviewId}	
+	</update>
+	
+	<delete id="deleteThumbsYN" parameterType="likes">
+		DELETE FROM likes
+		 WHERE reviewId = #{reviewId}
+		   AND memberId = #{memberId}
+	</delete>
+	
+	<update id="reduceThumbs" parameterType="likes">
+		UPDATE review
+		   SET reviewThumbs = reviewThumbs - 1
+		 WHERE reviewid = #{reviewId}
+	</update>
+
+	<update id="updateReview" parameterType="review">
+  	UPDATE pay
+  		   set reviewId = #{reviewId}
+  	 WHERE payId = #{payId}
+  </update>
+	
+	
+	<select id="getReviewId" parameterType="review" resultType="review">
+		SELECT *
+ 		  FROM review
+ 		 WHERE payId = #{payId}
+	</select>
+
+
+	<select id="getBestReview" parameterType="int" resultType="review">
+	SELECT r.*, m.membername
+	FROM review r, member m
+	WHERE r.reviewdate = (SELECT MAX(BR.reviewdate)
+	FROM (SELECT *
+	FROM review
+	WHERE reviewthumbs = (SELECT MAX(REVIEWTHUMBS)
+	
+	FROM review
+	WHERE productid = #{productId})
+	AND reviewthumbs >= 10) BR)
+	AND r.memberid = m.memberid
+	
+	</select>
+	
+	<update id="updateBestYN" parameterType="review">
+	UPDATE review
+	SET REVIEWBESTYN = 1
+	WHERE reviewId = #{reviewId}
+	</update>
+
+	<select id="cntBestReview" parameterType="int" resultType="int">
+		
+	SELECT COUNT(*)
+	  FROM review
+	 WHERE REVIEWBESTYN = 1
+	   AND memberId = #{memberId}
+		  
+	</select>
+</mapper>

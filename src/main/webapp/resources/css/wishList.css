@@ -1,0 +1,148 @@
+/* 장바구니 페이지 추가 css 시작*/
+
+
+#wish-s{
+  display: inline-block;
+  vertical-align: top;
+  
+}
+
+
+#sideTb_left{
+  width: 600px;
+  border-collapse : collapse;
+}
+
+#sideTb_left_td {
+  margin-top: 10px;
+}
+
+#sideTb2 {
+  width: 200px;
+  height: 200px;
+  border-collapse : collapse;
+}
+
+#sideTb_left {
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+del {
+  color: gray;
+}
+
+#sideTb2 {
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+#sideTb_nb {
+  font-size: 13px;
+  width: 40px; 
+  text-align: center; 
+  border: 1px solid rgb(193, 193, 193);
+}
+
+#wishlist {
+  padding-top: 40px;
+  padding-bottom: 10px;
+  font-size: 30px; 
+  font-weight: bolder; 
+  color: black; 
+  text-align: center;
+}
+
+#sideTb_menu {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#sideTb_contents {
+  font-size: 13px;
+}
+
+#hr {
+  width: 1000px;
+}
+
+#last-cost {
+  font-size: 22px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+#your_product1 {
+  font-size: 22px;
+}
+#your_product2 {
+  font-size: 17px;
+}
+
+.sideTb_right{
+  background-color: rgb(243, 243, 243);
+  margin-right: 7%;
+  width: 24%;
+  display: inline-block;
+  padding: 0px 20px;
+  font-size: 15px;
+}
+.pricetext-1{
+  text-align: center;
+}
+.p-1-1{
+  width: 50%;
+  float: left;
+}
+.p-2-1{
+  width: 50%;
+  float: right;
+  text-align: right;
+}
+.p-3-1{
+  width: 50%;
+  float: left;
+}
+.p-4-1{
+  width: 50%;
+  float: left;
+  text-align: right;
+}
+.buy-btn-1{
+  text-align: center;
+
+}
+.btn-1-1{
+  width: 160px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: bolder;
+  margin-top: 10%;
+}
+
+.btn-1-2{
+  width: 160px;
+  height: 50px;
+  border-radius: 5px;
+  color: aliceblue;
+  background-color: #000;
+  margin-top: 10%;
+  margin-left: 20%;
+}
+
+.l-1-1{
+  margin-right: 7%;
+  margin-left: 7%;
+  height: 20px;
+}
+.l-2-1{
+  margin-top: 80%;
+  margin-right: 7%;
+  margin-left: 7%;
+  margin-bottom: 10%;
+
+}
+
+
+/* 장바구니 페이지 추가 css 종료*/

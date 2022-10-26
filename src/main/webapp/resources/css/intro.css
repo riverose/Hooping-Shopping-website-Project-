@@ -1,0 +1,32 @@
+#introHome {
+    color: black;
+}
+
+#intro {
+    padding-top: 50px;
+    padding-bottom: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#intro1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 25px;
+    font-weight: 400;
+    text-align: center;
+}
+
+#intro2 {
+    padding-top: 25px;
+    padding-bottom: 15px;
+    font-size: 17px;
+    text-align: center;
+}
+
+#intro3 {
+    padding: 25px;
+    font-size: 15px;
+    text-align: center;
+}

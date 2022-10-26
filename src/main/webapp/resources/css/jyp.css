@@ -1,0 +1,38 @@
+input[type=text] {
+	outline: none;
+	border: 1px solid black;
+	border-radius: 20px;
+}
+
+input[name=searchKeyword]:focus {
+	outline: 1px solid rgb(238, 109, 109);
+}
+
+}
+input[type=email] {
+	box-shadow: 2px 2px 2px 2px;
+}
+
+input[type=button] {
+	border-radius: 5px;
+	border: 1px solid rgb(201, 201, 201);
+	color: #fff;
+/* 	background-color: #090909; */
+	border-color: #fff;
+}
+
+input[type=select] {
+	border-radius: 5px;
+}
+
+#si {
+   width: 90%;
+   height: 90%;
+   display: block;
+   margin: auto;
+}
+
+#ss {
+   width: 40px;
+   height: 40px;
+}

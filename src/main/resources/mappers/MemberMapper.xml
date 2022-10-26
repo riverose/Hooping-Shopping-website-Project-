@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberDAO">
+	
+	<insert id="memberJoin" parameterType="member">
+		INSERT INTO member
+		(memberId, memberEmail,memberPwd,memberName,memberPhoneNum
+		,memberBaseAddress,memberInstagramId,memberSignUpDate, memberRating, memberRateName
+		)
+		VALUES
+		(member_seq.NEXTVAL, #{memberEmail}, #{memberPwd}, #{memberName}, #{memberPhoneNum}
+		, #{memberBaseAddress}, #{memberInstagramId}, SYSDATE, 0, '뉴비'
+		)
+	</insert>
+	
+	<select id="memberCheck" parameterType="member" resultType="member">
+		SELECT *
+			FROM MEMBER
+		WHERE memberEmail = #{memberEmail}
+			AND memberPwd = #{memberPwd}
+	</select>
+	
+	<update id="memberUpdate" parameterType="member">
+		UPDATE member
+		SET
+			memberEmail = #{memberEmail},
+			memberPwd = #{memberPwd},
+			memberName = #{memberName},
+			memberPhoneNum = #{memberPhoneNum},
+			memberBaseAddress = #{memberBaseAddress},
+			memberInstagramId = #{memberInstagramId}
+		WHERE 
+			memberId = #{memberId}
+	</update>
+	
+	
+	<select id="getMember" parameterType="member" resultType="member">
+		  SELECT *
+		  	 FROM member
+		  WHERE memberId = #{memberId}
+	</select>
+	
+	<select id="memberUsing" parameterType="String" resultType="int">
+		select count(memberEmail) as email from member
+		where memberEmail = #{memberEmail}
+	</select>
+		<update id="updateRateInfo" parameterType="member">
+		update member set memberRateName=#{memberRateName}, memberRateDate=SYSDATE where memberid=#{memberId}
+	</update>
+	
+	<select id="getLastMember" resultType="member">
+		SELECT * FROM (SELECT * FROM MEMBER ORDER BY MEMBERID DESC) WHERE ROWNUM=1
+	</select>
+	
+	<select id="getMemberById" resultType="member">
+		SELECT * FROM member where memberId=#{id}
+	</select>
+	
+	<select id="managerCheck" parameterType="member" resultType="member">
+		SELECT * 
+		FROM manager 
+		WHERE managerEmail = #{memberEmail}
+			AND managerPwd = #{memberPwd}
+	
+	</select>
+	
+</mapper>

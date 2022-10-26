@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cartDAO">
+
+	<insert id="insertCart" parameterType="cart">
+		INSERT INTO cart
+		(cartId, memberId, productId, cartSize, 
+		cartColor, cartCount, productPrice, productName, pimageAddr1
+		)
+		VALUES 
+		(cart_seq.NEXTVAL, #{memberId}, #{productId}, #{cartSize},
+		#{cartColor}, #{cartCount}, #{productPrice}, #{productName}, #{pimageAddr1}
+		)
+	</insert>
+	
+    <select id="getCartList" resultType="com.hoo.ping.domain.CartVO">
+         SELECT
+            c.*, 
+            p.productId As productId,
+            m.memberName AS memberName, 
+            p.productPrice AS productPrice,
+            p.productName AS productName,
+            o.optionsstock
+        FROM
+            member m, product p, cart c, OPTIONS o
+        WHERE m.memberId = c.memberId
+            AND p.productId = c.productId
+            AND c.memberId = #{memberId}
+            AND c.CARTCOLOR = o.OPTIONSCOLOR
+            AND c.CARTSIZE = o.OPTIONSSIZE
+            AND c.productId = o.productid
+        ORDER BY
+            c.cartId
+    </select>
+    
+   	<delete id="deleteCart" parameterType="String">
+        DELETE FROM cart 
+        WHERE cartId = #{cartId}
+    </delete>
+    
+    <!-- 장바구니에 동일한 상품 레코드 확인 -->
+    <select id="countCart" resultType="int" parameterType="cart">
+        SELECT COUNT(productId) as productId 
+          FROM cart
+        WHERE memberId= #{memberId} 
+        AND productId = #{productId}
+        AND cartSize = #{cartSize}
+        AND cartColor = #{cartColor}
+    </select>
+    
+    <!-- 장바구니에 동일한 상품이 존재하면 수량만 추가 -->
+    <update id="updateCart">
+        UPDATE cart 
+        SET cartCount = cartCount + #{cartCount} 
+        WHERE memberId= #{memberId} 
+        AND productId = #{productId}
+        AND cartSize = #{cartSize}
+        AND cartColor = #{cartColor}
+    </update>
+    
+    <update id="updateCartCnt" parameterType="cart">
+    	UPDATE cart
+    	   SET cartCount = #{cartCount}
+    	 WHERE cartId = #{cartId}
+    </update>
+    
+    <select id="cartSum" parameterType="int" resultType="int">
+    	SELECT CARTCOUNT * PRODUCTPRICE as cartsum 
+  		  FROM cart
+ 		 WHERE memberid = #{memberId}
+ 		 ORDER BY cartid
+    </select>
+    
+    <select id="getCartIdList" parameterType="int" resultType="int">
+    	SELECT cartId
+    	  FROM cart
+    	 WHERE memberId = #{memberId}
+    	 ORDER BY cartid
+    
+    </select>
+    
+    
+</mapper>

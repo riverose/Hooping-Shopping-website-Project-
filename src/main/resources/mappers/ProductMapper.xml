@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product">
+	<select id="productList" parameterType="HashMap" resultType="product">
+		select product.*,pimageaddr1 from product,pimage
+	 		where productGender=#{gender} and producttype=#{type} and product.productid=pimage.productid
+	 		order by productCnt desc
+	</select>
+	<select id="productDetail" parameterType="_int" resultType="product">
+		select product.*, pimageaddr1 from product,pimage
+			where product.productid=pimage.productid and product.productid=#{productId}
+	</select>
+	<select id="productOptions" parameterType="_int" resultType="options">
+		select distinct optionsColor from options where productid=#{productId}
+	</select>
+	<select id="productOptionsSize" parameterType="options" resultType="options">
+		select optionsSize from options where optionsColor=#{optionsColor} and productId=#{productId} and optionsStock>0
+	</select>
+	<select id="productBestGender" parameterType="String" resultType="product">
+		select product.*,pimageaddr1 from product,pimage
+			where product.productid=pimage.productid
+			and productGender=#{gender}
+	 		order by productCnt desc
+	</select>
+	<select id="productBestAll" resultType="product">
+		select product.*,pimageaddr1 from product,pimage
+			where product.productid=pimage.productid
+			order by productCnt desc
+	</select>
+	<select id="productNew" resultType="product">
+		select * from
+		(select product.*,pimageaddr1 from product,pimage where product.productid=pimage.productid order by product.productId desc)
+		where rownum <![CDATA[<=]]> 8
+	</select>
+	<update id="upProductCnt" parameterType="product">
+		update product set productCnt=productCnt+1 where productId=#{productId}
+	</update>
+	<update id="downOptStock" parameterType="HashMap">
+		update options set optionsStock=optionsStock-1 where productId=#{productId} and optionscolor=#{color} and optionssize=#{size}
+	</update>
+<!-- 리뷰 이미지 -->
+	<select id="productReviewImg" parameterType="_int"
+		resultType="product">
+		select product.*, REVIEWIMG from product,review
+		where product.productid=review.productid and product.productid=#{productId}
+	</select>
+	<!-- 리뷰 이미지 끝 -->
+	<!-- 검색 시작 -->
+	<select id="searchProduct" parameterType="HashMap"
+		resultType="product">
+		SELECT product.*,pimageaddr1 from product,pimage
+		<where>
+			<!-- * 공통점 ${} 와 #{} -->
+			<if test="searchKeyword != null">
+				productName like '%${searchKeyword}%'
+				and product.productid=pimage.productid
+			</if>
+		</where>
+<!-- 		order by productname desc -->
+	</select>
+	<!-- 검색 끝 -->
+	<select id="brandList" parameterType="HashMap" resultType="product">
+		select distinct productco from product
+	 		where productGender=#{gender} and producttype=#{type}
+	 		order by productco asc
+	</select>
+	<select id="filterList" parameterType="HashMap" resultType="product">
+		select distinct product.*,pimageaddr1 from product,pimage,options
+	 		where product.productid=pimage.productid and product.productid=options.productid and
+	 		productgender=
+	 		<foreach item="cate" collection="category" index="index" separator=" and producttype=">
+	 			#{cate}
+	 		</foreach>
+	 		<choose>
+	 			<when test="brands[0] eq ''">
+	 			</when>
+	 			<otherwise>
+	 				and productco in
+	 				<foreach item="brand" collection="brands" index="index" separator="," open="(" close=")">
+	 				#{brand}
+	 			</foreach>
+	 			</otherwise>
+	 		</choose>
+	 		<if test="colors.size != 0">
+	 			<foreach item="color" collection="colors" index="index" separator=" or optionscolor " open="and (UPPER(optionscolor) " close=")">
+	 				 LIKE '%'||UPPER(#{color})||'%'
+	 			</foreach>
+	 		</if>
+	 		<if test="price.size != 0">
+	 			and productprice between
+	 			<foreach item="minmax" collection="price" index="index" separator="and">
+	 				 #{minmax}
+	 			</foreach>
+	 		</if>
+	 		order by productCnt desc
+	</select>
+	
+	<select id="getOptionsStock" parameterType="options" resultType="int">
+		 SELECT optionsstock
+		   from options
+		  where productid = #{productId}
+		    AND optionscolor = #{optionsColor}
+		    and optionssize = #{optionsSize}
+	</select>
+	
+</mapper>

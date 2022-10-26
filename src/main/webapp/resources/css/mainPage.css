@@ -1,0 +1,79 @@
+/* 메인 페이지 추가 css 시작 ----------------------------- */
+
+#nav {
+  display: inline !important;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+#home_all1, #home_all2, #home_all3 {
+  display: inline-block !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+#nav_center {
+  justify-content: center;
+  background-color: black;
+}
+
+#tothetop {
+  background-color: lightgray;
+  border-color: lightgray;
+}
+
+.navbar-light .navbar-nav .nav-link{
+  color: white;
+}
+
+.navbar-light:hover .navbar-nav:hover .nav-link:hover {
+  color: gray;
+}
+
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+  color: white;
+}
+
+#drop_menu {
+  text-align: left;
+}
+
+.text-primary {
+  color: black !important;
+}
+
+#review_center {
+  text-align: center;
+}
+
+#foot {
+  width: 100%;
+  background-color: #fff !important
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background: gray;
+  height:1px;
+  border:0;
+}
+
+#hwoweare1 {
+  display: inline-block;
+  padding-right: 20px;
+}
+
+#hwoweare2 {
+  display: inline-block;
+  padding-left: 20px;
+}
+#where {
+  display: inline-block;
+  padding-bottom: 50px;
+  font-size: 15px;
+  color: gray;
+}
+
+/* 메인 페이지 추가 css 종료 ----------------------------- */

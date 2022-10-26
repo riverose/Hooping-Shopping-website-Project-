@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardDAO">
+	<select id="getBoardList" resultType="board" parameterType="pagination">
+
+		SELECT *
+			FROM(
+			    SELECT rownum as rnum, t.*
+			    FROM
+			    (
+			        SELECT *
+			        FROM board
+			        WHERE 1=1
+			        <choose>			        
+			        <when test="searchCondition neq ''">
+			        AND LOWER( ${searchCondition} ) LIKE '%'|| LOWER(#{searchKeyword}) ||'%'
+			        ORDER BY boarddate DESC
+			        </when>
+			        </choose>
+			    ) t
+			    WHERE rownum <![CDATA[<]]> #{startList}+#{sizePerPage}
+			)
+		WHERE rnum <![CDATA[>=]]> #{startList}
+
+	</select>
+
+	<insert id="insertBoard" parameterType="board">
+
+		INSERT INTO board
+		(
+		BOARDID, BOARDTITLE, BOARDCONTENT,
+		BOARDDATE, ANSWERYN, MEMBERID, MEMBERNAME)
+		VALUES (board_seq.nextval, #{boardTitle}, #{boardContent},
+		SYSDATE, 0,
+		#{memberId}, #{memberName})
+
+	</insert>
+
+	<select id="getBoard" resultType="board" parameterType="board">
+
+		SELECT *
+		FROM board
+		WHERE boardId = #{boardId}
+
+	</select>
+
+	<select id="getBComment" resultType="bComment"
+		parameterType="board">
+
+		SELECT *
+		FROM bComment
+		WHERE boardId = #{boardId}
+
+	</select>
+
+	<update id="updateBoard" parameterType="board">
+
+		UPDATE board
+		SET
+		boardTitle = #{boardTitle},
+		boardContent = #{boardContent}
+		WHERE boardId
+		= #{boardId}
+
+	</update>
+
+	<delete id="deleteBoard" parameterType="board">
+
+		DELETE FROM board
+		WHERE
+		boardId = #{boardId}
+
+	</delete>
+
+	<insert id="insertBComment">
+
+		INSERT INTO bcomment ( BCOMMENTID, BCOMMENTUSER,
+		BCOMMENTDATE,
+		BCOMMENTCONTENTS, BOARDID )
+		VALUES ( bcomment_seq.nextval,
+		#{bcommentUser}, SYSDATE,
+		#{bcommentContents}, #{boardId} )
+	</insert>
+
+	<update id="updateAnswerYN">
+
+		UPDATE board
+		SET ANSWERYN = '1'
+		WHERE boardId =
+		#{boardId}
+
+	</update>
+	
+	<update id="deleteAnswerYN">
+
+		UPDATE board
+		SET ANSWERYN = '0'
+		WHERE boardId =
+		#{boardId}
+
+	</update>
+
+	<select id="cntBoardList" resultType="int" parameterType="pagination">
+
+		SELECT COUNT(*)
+		FROM board
+		where 1=1
+    	<choose>
+    		<when test="searchCondition neq ''">
+    		and lower( ${searchCondition} ) like '%'|| lower(#{searchKeyword}) ||'%'
+    		</when>
+    	</choose>
+	</select>
+
+	<update id="updateBComment">
+
+		UPDATE bComment
+		SET bcommentContents = #{bcommentContents}
+		WHERE bcommentId = #{bcommentId}
+
+	</update>
+
+	<delete id="deleteBComment">
+
+		DELETE FROM BCOMMENT
+		WHERE boardId = #{boardId}
+
+	</delete>
+
+</mapper>

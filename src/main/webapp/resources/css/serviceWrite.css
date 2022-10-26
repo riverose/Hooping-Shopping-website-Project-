@@ -1,0 +1,76 @@
+/* 고객센터 (게시글 글쓰기) css 시작 ---------------------------------------------------- */
+  
+  .ser-write-main{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .service-write-selectbox-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  
+  .service-write-selectbox-title{
+    width: 100px;
+    border: 1px solid black;
+    text-align: center;
+  }
+  
+  .service-write-selectbox{
+    width: 800px;
+    margin-left: 10px;
+    
+  }
+  
+  .service-write-title-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  
+  .service-write-title{
+    width: 100px;
+    border: 1px solid black;
+    text-align: center;
+  }
+  
+  .service-write-title-input{
+    width: 800px;
+    margin-left: 10px;
+  }
+  
+  .service-write-content-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  
+  .service-write-content{
+    width: 1000px; 
+    height: 300px;
+  }
+  
+  .service-write-btns-div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+  }
+  
+  .service-write-btns-ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin-top: 1%;
+    
+  }
+  .service-write-btns-ul > li:nth-child(2){
+    margin-left: 2%;
+    
+  }
+  
+  /* 고객센터 (게시글 글쓰기) css 종료 -----------------------------------------------*/

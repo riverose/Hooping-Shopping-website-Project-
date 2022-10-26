@@ -1,0 +1,43 @@
+/* BEST 페이지 추가 css 시작 -------------------------------------------- */
+  .tab-div{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .best-row{
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .best-tap{
+    display: flex;
+    width: 30%;
+    padding-bottom: 3%;
+    justify-content: space-between;
+    margin-right: 0%;
+  }
+  
+  .best-tap-button{
+    border: none;
+    width: 100px;
+    height: 150%;
+  }
+  
+  .best-tap-button:active{
+    border: none;
+    width: 100px;
+    height: 150%;
+    background-color: black;
+    color: white;
+  }
+  
+  .best-top3{
+    text-align: center;
+  }
+  
+  .best-top3-text{
+    font-size: 20px;
+    font-weight: 1000;
+  }
+  
+  /* BEST 페이지 추가 css 종료 -------------------------------------------- */

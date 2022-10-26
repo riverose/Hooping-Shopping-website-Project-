@@ -1,0 +1,45 @@
+.reviewForm{
+	display:flex;
+}
+.uploadReviewImg{
+	width:50%;
+}
+.uploadReviewImg>img{
+	width:90%;
+	display:block;
+	margin:auto;
+}
+.rightReviewInputBox{
+	width:50%;
+}
+
+.InputReview.Total>input{
+	width:30px;
+	border:0px;
+}
+.InputReview.Total>input:focus{
+	outline: none;
+}
+
+
+.InputReview{
+	margin-bottom:20px;
+}
+
+.InputReview input[type=radio]{
+    display: none;
+}
+
+.InputReview input[type=radio]:checked+label{
+	color: #212529;
+	background-color: #8b9cdc;
+	border-color: #90a0dc;
+}
+
+.reviewSubmit{
+	width:100%;
+}
+.reviewSubmit>input{
+	display: block;
+	width:100%;
+}

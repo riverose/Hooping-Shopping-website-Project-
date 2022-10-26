@@ -1,0 +1,197 @@
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  font-family: "BMJUA" !important;
+}
+
+.bestReview{
+	
+    width:max-content;
+    margin:auto;
+    display: flex;
+    justify-content: center;
+}
+
+.imgMix{
+  display: flex;
+  justify-content: center;
+}
+.imgMix>img{
+  width:120%;
+  margin:auto;
+}
+.reviewBox{
+	display: flex;
+	flex-direction: column;
+	
+}
+
+.reviewList{
+   height: max-content;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.reviewListdiv{
+	width: 150%;
+	height: auto;
+}
+
+.oneReview{
+    margin: 10%;
+    padding: 0px;
+    width: 60%;
+}
+.reviewImg{
+  padding:0px;
+  margin:5% 0px;
+}
+.reviewImg>img{
+  width:100%;
+}
+.reviewId{
+  color: black;
+}
+.fst>img{
+  width:max-content;
+}
+
+.oneReview:hover{
+  transform: scale(1.2);
+  transition-duration: 0.5s;
+}
+
+.fontDoHyeon{
+  font-family: 'Do Hyeon', sans-serif;
+  color : black;
+}
+.reviewTitle>.fontGothic{
+  font-size:30px;
+  color:black;
+  width:fit-content;
+  margin:auto;
+}
+
+.fontGothic{
+  font-family: 'Nanum Gothic',sans-serif;
+}
+
+.fullScreen{
+  position:fixed;
+  padding:0;
+  margin:0;
+
+  top:0;
+  left:0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.5);
+}
+.reviewDetail{
+  display:flex;
+  padding:0;
+  margin:auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+
+  width:1000px;
+  height:700px;
+  background-color: white;
+}
+.ReviewDetailText{
+  height:50%;
+}
+.ReviewDetailThumbs{
+  height:10%;
+}
+.writeReviewComment{
+  height:12.5%;
+  padding-bottom:6%;
+}
+
+.reviewDetailImg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+}
+
+#reviewDetail-reviewImg{
+	margin-bottom: 5%;
+}
+
+.reviewDetailInfo{
+	font-size: 19px;
+	text-align: center;
+}
+
+.reviewDetailImg>img{
+  width:90%;
+}
+.dontshow{
+  display:none;
+}
+.reviewUserInfo{
+  font-size:larger;
+}
+.rightReviewDetailBox{
+  width:50%;
+  padding:5px;
+  padding-top: 50px;
+}
+.writeReviewComment{
+  padding-bottom:50px;
+}
+.writeReviewComment>input{
+  width:90%;
+}
+.commentText{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#reviewDetail-reviewStar{
+	color: rgb(238,109,109);
+}
+
+#reviewDetail-reviewText{
+	
+	border: 3px solid rgb(238,109,109);
+    width: auto;
+    height: 150px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-botton: 10px;
+}
+
+.readReviewComment{
+	
+	margin-top: 10px;
+}
+
+#rCommentContents{
+	
+    border: 1px solid rgb(238,109,109);
+    border-radius: 5px;
+    width: 80%;
+    margin-right: 5%;
+
+}
+
+#rCommentBtn{
+	width: 12%;
+}
+
+.reviewPage-OneReview{
+	
+	width: 60%;
+	margin: 50px 0;
+}

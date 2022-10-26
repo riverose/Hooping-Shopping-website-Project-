@@ -1,0 +1,80 @@
+/* 마이 페이지 추가 css 시작 ----------------------------------------------------- */
+  
+  #payrrbtn{
+  flex-direction: row-reverse;
+  }
+  .mypage-top{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 3%;
+  }
+  
+  .mypage-topline{
+    border: 1px solid black;
+    margin-bottom: 2%;
+  }
+  
+  .mypage-top-menu{
+    display: inline-block;
+   
+  }
+  
+  .mypage-logo-div{
+    display: inline-block;
+  }
+  
+  .mypage-logo{
+    width: 10%;
+  }
+  
+  .mypage-basic{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .mypage-hello{
+    display: inline-block;
+    margin-bottom: 5%;
+  }
+  
+  .mypage-edit-btns{
+    display: inline-block;
+  }
+  
+  .mypage-top-vertical{
+    border-left : 1px solid black;
+   
+  }
+  
+  .mypage-order-product-td{
+    display: flex;
+  }
+  
+  .mypage-order-product-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .mypage-order-product-option{
+    font-size: small;
+    color: grey;
+  }
+  
+  .mypage-coupon-count, .mypage-point-count{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mypage-recent-btns{
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .mypage-refund-btn{
+    margin-left: 1%;
+  }
+  
+  /* 마이 페이지 추가 css 종료 ----------------------------------------------------- */

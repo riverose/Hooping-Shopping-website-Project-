@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="couponDAO">
+	<insert id="addCoupon" parameterType="member">
+		insert into coupon values(coupon_seq.NEXTVAL, #{couponName}, #{couponPrice}, #{memberId})
+	</insert>
+	<select id="countCoupon" resultType="_int">
+		select count(*) from coupon where memberId=#{id}
+	</select>
+	<select id="couponList" parameterType="_int" resultType="member">
+		select * from coupon where memberId=#{id} order by couponId
+	</select>
+	<select id="getCouponById" parameterType="_int" resultType="member">
+		select * from coupon where couponId=#{couponId}
+	</select>
+	<delete id="deleteCoupon" parameterType="_int">
+		delete from coupon where couponId=#{id}
+	</delete>
+	
+</mapper>
